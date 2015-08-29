@@ -4,7 +4,7 @@
 
 
 var recentMovies = [];
-
+var imdb = "http://www.imdb.com/title/";
 var topMovies = [];
 
 var top1 = "http://www.omdbapi.com/?t=taken&y=&plot=short&r=json",
@@ -16,12 +16,25 @@ var top1 = "http://www.omdbapi.com/?t=taken&y=&plot=short&r=json",
 var Movie = {};
 
 Object.defineProperty(Movie, 'init', {
-    value: function (title, description, image, rating) {
+    value: function (title, description, image, rating, link) {
         this.title = title;
         this.description = description;
         this.image = image;
         this.rating = rating;
+        this.link = link;
         return this;
+    }
+});
+Object.defineProperty(Movie, 'link', {
+    get: function () {
+        return this._link;
+    },
+    set: function (value) {
+        if(value){
+        this._link = value;
+        }else{
+            throw Error("Link can't be  empty!");
+        }
     }
 });
 
@@ -95,21 +108,25 @@ function getTop4Movies() {
             move1.title = top4M[0]._title;
             move1.image = top4M[0]._image;
             move1.rating = top4M[0]._rating;
+            move1.link = top4M[0]._link;
         var move2 = Object.create(Movie);
             move2.description = top4M[1]._description;
             move2.title = top4M[1]._title;
             move2.image = top4M[1]._image;
             move2.rating = top4M[1]._rating;
+            move2.link= top4M[1]._link;
         var move3 = Object.create(Movie);
             move3.description = top4M[0]._description;
             move3.title = top4M[2]._title;
             move3.image = top4M[2]._image;
             move3.rating = top4M[2]._rating;
+            move3.link= top4M[2]._link;
         var move4 = Object.create(Movie);
             move4.description = top4M[0]._description;
             move4.title = top4M[3]._title;
             move4.image = top4M[3]._image;
             move4.rating = top4M[3]._rating;
+            move4.link= top4M[3]._link;
 
         topMovies.push(move1);
         topMovies.push(move2);
@@ -130,6 +147,7 @@ function getTop4Movies() {
         firstMovie.description = move.Plot;
         firstMovie.image = move.Poster;
         firstMovie.rating = move.imdbRating;
+        firstMovie.link = imdb + move.imdbID;
         topMovies.push(firstMovie);
         return $.ajax({url: top2});
     }).then(function (move) {
@@ -140,6 +158,7 @@ function getTop4Movies() {
             firstMovie.description = move.Plot;
             firstMovie.image = move.Poster;
             firstMovie.rating = move.imdbRating;
+            firstMovie.link = imdb + move.imdbID;
             topMovies.push(firstMovie);
             return $.ajax({url: top3});
         }
@@ -152,6 +171,7 @@ function getTop4Movies() {
             firstMovie.description = move.Plot;
             firstMovie.image = move.Poster;
             firstMovie.rating = move.imdbRating;
+            firstMovie.link =imdb + move.imdbID;
             topMovies.push(firstMovie);
             return $.ajax({url: top4});
         }).then(function (move) {
@@ -162,6 +182,7 @@ function getTop4Movies() {
             firstMovie.description = move.Plot;
             firstMovie.image = move.Poster;
             firstMovie.rating = move.imdbRating;
+            firstMovie.link = imdb + move.imdbID;
             topMovies.push(firstMovie);
             alert("Uraaaa");
             localStorage.setItem('topMovies', JSON.stringify(topMovies));
