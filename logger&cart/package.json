@@ -1,0 +1,11 @@
+{
+  "name": "MovieCatalog",
+  "version": "1.0.0",
+  "license": "MIT",
+  "dependencies": {
+    "babel-core": "^5.8.23",
+    "jquery": "^2.1.4",
+    "rsvp": "^3.0.21",
+    "systemjs": "^0.18.17"
+  }
+}
