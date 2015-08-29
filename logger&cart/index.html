@@ -7,6 +7,7 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/movies.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
@@ -28,98 +29,119 @@
             </div>
         </div>
     </div>
+    <div class="container">
+        <div class="row">
+            <div class="slider">
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6" id="top-movie1">
+
+            </div>
+            <div class="col-md-6" id="top-movie2">
+
+            </div>
+            <div class="col-md-6" id="top-movie3">
+
+            </div>
+            <div class="col-md-6" id="top-movie4">
+
+            </div>
+        </div>
+    </div>
 </header>
-<button type="button" data-info="add-to-cart" onclick="cart.add('43');"><i class="fa fa-shopping-cart"></i> <span
-        class="hidden-xs hidden-sm hidden-md">Add to Cart</span></button>
 <script src="node_modules/rsvp/dist/rsvp.js"></script>
 <script src="js/serverInit.js"></script>
 <script src="model/cartProduct.js"></script>
 <script src="model/cart.js"></script>
 <script src="model/signUp.js"></script>
 <script src="model/logIn.js"></script>
+<script src="model/movie.js"></script>
 <script src="controller/loggerController.js"></script>
-    <script src="controller/cartController.js"></script>
+<script src="controller/cartController.js"></script>
+<script src="controller/moviesController.js"></script>
 <script type="text/javascript">
-  //// $(document).ready(function () {
-  //     var currentUser = Parse.User.current();
+    //// $(document).ready(function () {
+    //     var currentUser = Parse.User.current();
 
-  //     if (currentUser) {
-  //         $('#toggle-login').hide();
-  //         $('#toggle-signup').hide();
-  //         $('#logout-btn').show();
-  //         $('#toggle-username').html(currentUser.get('username'));
-  //         $('#toggle-username').show();
-  //     }
-  //     $("button[data-toggle='dropdown']").click(function (e) {
-  //         console.log(e.target.parentNode);
-  //         $(e.target.parentNode).toggleClass('open');
-  //     });
+    //     if (currentUser) {
+    //         $('#toggle-login').hide();
+    //         $('#toggle-signup').hide();
+    //         $('#logout-btn').show();
+    //         $('#toggle-username').html(currentUser.get('username'));
+    //         $('#toggle-username').show();
+    //     }
+    //     $("button[data-toggle='dropdown']").click(function (e) {
+    //         console.log(e.target.parentNode);
+    //         $(e.target.parentNode).toggleClass('open');
+    //     });
 
-  //     console.log(currentUser);
-  //     $('#signup-btn').click(function () {
-  //         var username, password, email, mailingAddress, cart;
-  //         username = $('#su-username').val();
-  //         password = $('#su-password').val();
-  //         email = $('#su-email').val();
-  //         mailingAddress = $('#su-mailing-address').val();
-  //         signUp(username,password,email,mailingAddress).then(function(user){
-  //             var product = createCartProduct();
-  //             product.init("Hulk",4,10);
+    //     console.log(currentUser);
+    //     $('#signup-btn').click(function () {
+    //         var username, password, email, mailingAddress, cart;
+    //         username = $('#su-username').val();
+    //         password = $('#su-password').val();
+    //         email = $('#su-email').val();
+    //         mailingAddress = $('#su-mailing-address').val();
+    //         signUp(username,password,email,mailingAddress).then(function(user){
+    //             var product = createCartProduct();
+    //             product.init("Hulk",4,10);
 
-  //            var usercart = user.get("cart");
-  //             usercart.addProduct(product);
-  //             usercart.uploadProducts().then(function(cart){
-  //                 var relation =  usercart.relation("cartProducts");
-  //                 relation.add(usercart.cartProducts);
-  //                 usercart.save().then(function(){
-  //                     alert("Cart was saved");
-  //                 });
-  //             },function(error){
-  //                 alert(error.message);
-  //             });
-  //          ////////var relation =  usercart.relation("cartProduct");
-  //          ////  product.save().then(function(prod){
+    //            var usercart = user.get("cart");
+    //             usercart.addProduct(product);
+    //             usercart.uploadProducts().then(function(cart){
+    //                 var relation =  usercart.relation("cartProducts");
+    //                 relation.add(usercart.cartProducts);
+    //                 usercart.save().then(function(){
+    //                     alert("Cart was saved");
+    //                 });
+    //             },function(error){
+    //                 alert(error.message);
+    //             });
+    //          ////////var relation =  usercart.relation("cartProduct");
+    //          ////  product.save().then(function(prod){
 
-  //          ////      relation.add(product);
-  //           //     console.log("relkation is : "+ relation);
-  //           //     //usercart.addProduct(product);
-  //           //     usercart.save().then(function(cart){
-  //           //         console.log("Cart was saved!");
-  //             //});
+    //          ////      relation.add(product);
+    //           //     console.log("relkation is : "+ relation);
+    //           //     //usercart.addProduct(product);
+    //           //     usercart.save().then(function(cart){
+    //           //         console.log("Cart was saved!");
+    //             //});
 
-  //             });
+    //             });
 
-  //         });
-  //    // });
-  //     $('#login-btn').click(function () {
-  //         var username, password;
-  //         username = $('#li-username').val();
-  //         password = $('#li-password').val();
+    //         });
+    //    // });
+    //     $('#login-btn').click(function () {
+    //         var username, password;
+    //         username = $('#li-username').val();
+    //         password = $('#li-password').val();
 
-  //         logIn(username,password).then(function(user) {
-  //                     console.log('vtor promis');
+    //         logIn(username,password).then(function(user) {
+    //                     console.log('vtor promis');
 
-  //                     // The current user is now set to user.
-  //                     alert("Session for user: " + user.get("username"))
-  //                     $('#toggle-login').hide();
-  //                     $('#toggle-signup').hide();
-  //                     $('#logout-btn').show();
-  //                     $('#login').hide();
-  //                     $('#toggle-username').html('Hi ' + user.get("username") + ' !');
-  //                     $('#toggle-username').show();
-  //                     console.log('promisooo raboteee');
-  //                 }
-  //         );
-  //     });
-  //     $('#logout-btn').click(function () {
-  //         Parse.User.logOut();
-  //         $('#toggle-login').show();
-  //         $('#toggle-signup').show();
-  //         $('#logout-btn').hide();
-  //         $('#toggle-username').html('');
-  //         $('#toggle-username').hide();
-  //     });
-  // });
+    //                     // The current user is now set to user.
+    //                     alert("Session for user: " + user.get("username"))
+    //                     $('#toggle-login').hide();
+    //                     $('#toggle-signup').hide();
+    //                     $('#logout-btn').show();
+    //                     $('#login').hide();
+    //                     $('#toggle-username').html('Hi ' + user.get("username") + ' !');
+    //                     $('#toggle-username').show();
+    //                     console.log('promisooo raboteee');
+    //                 }
+    //         );
+    //     });
+    //     $('#logout-btn').click(function () {
+    //         Parse.User.logOut();
+    //         $('#toggle-login').show();
+    //         $('#toggle-signup').show();
+    //         $('#logout-btn').hide();
+    //         $('#toggle-username').html('');
+    //         $('#toggle-username').hide();
+    //     });
+    // });
 </script>
 
 </body>
