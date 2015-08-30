@@ -1,7 +1,10 @@
 /**
  * Created by Goran on 8/29/2015.
  */
-$(document).ready(function() {
+//$(document).ready(function() {
+
+
+    requirejs(["../model/movie.js"], function(util) {
 
     debugger;
     var top4 = [];
@@ -84,3 +87,4 @@ $(document).ready(function() {
         })
     });
 });
+//});
