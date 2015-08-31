@@ -1,9 +1,9 @@
-requirejs(["../model/movie.js"], function (util) {
+requirejs(["../model/top-movies-generator.js"], function (generator) {
     requirejs(["../view/topMovieTemplate.js"], function (util) {
 
         $(document).ready(function () {
             var top4 = [];
-            getTop4Movies().then(function (movies) {
+            generator.getTop4Movies().then(function (movies) {
                 top4 = movies;
 
                 var movieTemplateHtml = getTopMovieTemp();
