@@ -12,6 +12,7 @@
 
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+    <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
     <script data-main="js/main.js" src="node_modules/requirejs/require.js"></script>
     <title>Movie Catalog</title>
     <meta property="og:url"           content="http://moviecatalog.net84.net" />
@@ -54,6 +55,21 @@
 <!--<script src="controller/loggerController.js"></script>-->
 <!--<script src="controller/cartController.js"></script>-->
 <!--<script src="controller/moviesController.js"></script>-->
+
+<script id="movie-template" type="text/x-handlebars-template">
+  <div class="box4">
+    <figure><img src="{{image}}"></figure>
+    <div class="info1 maxheight" style="height: 116px;">
+        <div class="box_inner">
+            <p class="list3title1" data-info="title">{{title}}</p>
+            <p class="list3title3" data-info="description">{{description}}</p>
+            <p class="list3title2" data-info="rating">{{rating}}</p>
+        </div>
+    </div>
+    <button type="button" class="btn btn-success pull-left" data-info="add-to-cart"><i class="fa fa-shopping-cart"></i> <span>Add to Cart</span></button>
+    <a data-info="link" href="{{link}}" class="btn-link btn-link1">read more<span></span></a>
+</div>
+</script>
 
 </body>
 </html>

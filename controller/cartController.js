@@ -11,7 +11,7 @@
 
             $("#cart-button").click(function () {
                 $("#cart").toggleClass('open');
-            })
+            });
         });
     });
    // });
