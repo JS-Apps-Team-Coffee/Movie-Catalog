@@ -1,9 +1,5 @@
-/**
- * Created by Goran on 8/29/2015.
- */
+/* global Parse*/
 
-
-var recentMovies = [];
 var imdb = "http://www.imdb.com/title/";
 var topMovies = [];
 
@@ -88,52 +84,68 @@ Object.defineProperty(Movie, 'rating', {
 });
 
 function getTop4Movies() {
-    var promise = new Parse.Promise();
+    var promise = new Parse.Promise(),
+        top4M,
+        i,
+        len;
 
     try {
         var retrievedObject = localStorage.getItem('topMovies');
-        var top4M = JSON.parse(retrievedObject);
+        top4M = JSON.parse(retrievedObject);
     } catch (error) {}
-    console.log(top4M);
-    if (top4M && top4M.length > 0) {
-        var move1 = Object.create(Movie);
-        move1.description = top4M[0]._description;
-        move1.title = top4M[0]._title;
-        move1.image = top4M[0]._image;
-        move1.rating = top4M[0]._rating;
-        move1.link = top4M[0]._link;
-        var move2 = Object.create(Movie);
-        move2.description = top4M[1]._description;
-        move2.title = top4M[1]._title;
-        move2.image = top4M[1]._image;
-        move2.rating = top4M[1]._rating;
-        move2.link = top4M[1]._link;
-        var move3 = Object.create(Movie);
-        move3.description = top4M[0]._description;
-        move3.title = top4M[2]._title;
-        move3.image = top4M[2]._image;
-        move3.rating = top4M[2]._rating;
-        move3.link = top4M[2]._link;
-        var move4 = Object.create(Movie);
-        move4.description = top4M[0]._description;
-        move4.title = top4M[3]._title;
-        move4.image = top4M[3]._image;
-        move4.rating = top4M[3]._rating;
-        move4.link = top4M[3]._link;
 
-        topMovies.push(move1);
-        topMovies.push(move2);
-        topMovies.push(move3);
-        topMovies.push(move4);
+    // console.log(top4M);
+    if (top4M && top4M.length > 0) {
+        // var move1 = Object.create(Movie);
+        // move1.description = top4M[0]._description;
+        // move1.title = top4M[0]._title;
+        // move1.image = top4M[0]._image;
+        // move1.rating = top4M[0]._rating;
+        // move1.link = top4M[0]._link;
+        // var move2 = Object.create(Movie);
+        // move2.description = top4M[1]._description;
+        // move2.title = top4M[1]._title;
+        // move2.image = top4M[1]._image;
+        // move2.rating = top4M[1]._rating;
+        // move2.link = top4M[1]._link;
+        // var move3 = Object.create(Movie);
+        // move3.description = top4M[0]._description;
+        // move3.title = top4M[2]._title;
+        // move3.image = top4M[2]._image;
+        // move3.rating = top4M[2]._rating;
+        // move3.link = top4M[2]._link;
+        // var move4 = Object.create(Movie);
+        // move4.description = top4M[0]._description;
+        // move4.title = top4M[3]._title;
+        // move4.image = top4M[3]._image;
+        // move4.rating = top4M[3]._rating;
+        // move4.link = top4M[3]._link;
+
+        // topMovies.push(move1);
+        // topMovies.push(move2);
+        // topMovies.push(move3);
+        // topMovies.push(move4);        
+
+        for (i = 0, len = top4M.length; i < len; i += 1) {
+            var movie = Object.create(Movie);
+
+            movie.description = top4M[i]._description;
+            movie.title = top4M[i]._title;
+            movie.image = top4M[i]._image;
+            movie.rating = top4M[i]._rating;
+            movie.link = top4M[i]._link;
+
+            topMovies.push(movie);
+        }
 
         promise.resolve(topMovies);
         debugger;
         return promise;
     }
+
     $.ajax({
         url: top1
     }).then(function(move) {
-
 
         var firstMovie = Object.create(Movie);
         firstMovie.title = move.Title;
@@ -146,7 +158,6 @@ function getTop4Movies() {
             url: top2
         });
     }).then(function(move) {
-
 
         var firstMovie = Object.create(Movie);
         firstMovie.title = move.Title;
@@ -161,7 +172,6 @@ function getTop4Movies() {
     }).then(
         function(move) {
 
-
             var firstMovie = Object.create(Movie);
             firstMovie.title = move.Title;
             firstMovie.description = move.Plot;
@@ -173,7 +183,6 @@ function getTop4Movies() {
                 url: top4
             });
         }).then(function(move) {
-
 
         var firstMovie = Object.create(Movie);
         firstMovie.title = move.Title;

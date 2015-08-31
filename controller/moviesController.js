@@ -1,6 +1,6 @@
  requirejs(["../model/movie.js"], function(util) {
+    
      $(document).ready(function() {
-         // var movieController = function() {
          var top4 = [];
          getTop4Movies().then(function(movies) {
              top4 = movies;
