@@ -139,7 +139,7 @@ define(["/model/topMovie.js", "/model/http-requester.js"], function(topMovie, ht
             }
 
             promise.resolve(topMovies);
-            debugger;
+            
             return promise;
         }
 
