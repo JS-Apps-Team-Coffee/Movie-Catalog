@@ -1,16 +1,16 @@
 /**
  * Created by Goran on 8/27/2015.
  */
+
 function signUp(username, password, email, mailingAddress) {
     var cart,
         user = new Parse.User();
-    cart = createCart();
-    console.log(password);
+
     user.set("username", username);
     user.set("password", password);
     user.set("email", email);
-    user.set("mailingAddress");
-    user.set("cart", cart);
+    user.set("mailingAddress",mailingAddress);
+    user.set("carts",[]);
 
     console.log(user);
     // other fields can be set just like with Parse.Object
@@ -36,3 +36,5 @@ function signUp(username, password, email, mailingAddress) {
         });
     return promise;
 }
+
+export default {signUp};

@@ -1,20 +1,20 @@
-requirejs(["../model/top-movies-generator.js"], function (generator) {
-    requirejs(["../view/topMovieTemplate.js"], function (util) {
 
-        $(document).ready(function () {
+import MovieModel from '../model/movie.js';
+import TopMovieTemplate from '../view/topMovieTemplate.js';
+
+       function moviesController() {
+
             var top4 = [];
-            generator.getTop4Movies().then(function (movies) {
+           MovieModel.getTop4Movies().then(function (movies) {
                 top4 = movies;
 
-                var movieTemplateHtml = getTopMovieTemp();
+                var movieTemplateHtml = TopMovieTemplate.getTopMovieTemp();
                 var template = Handlebars.compile(movieTemplateHtml);
 
                 $('#wrapper').load('view/firstPageTemplate.html', function () {
                     for (var i = 1; i <= 4; i += 1) {
                         var $movieWrapper = $('#top-movie' + i);
                         // var movieTemplateHtml = $('#movie-template').html();
-
-
                         $movieWrapper.html(template(top4[i - 1]));
                     }
                 });
@@ -27,6 +27,5 @@ requirejs(["../model/top-movies-generator.js"], function (generator) {
                     fjs.parentNode.insertBefore(js, fjs);
                 }(document, 'script', 'facebook-jssdk'));
             });
-        });
-    });
-});
+        }
+export default {moviesController};

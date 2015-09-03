@@ -9,23 +9,30 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/movies.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
+    <script src="node_modules/systemjs/dist/system.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
+    <script>
+        Parse.initialize("MamLZB0oJXKh0gwOG2mOorfM9SwWhhLc4LxyqAhv", "lj9oAHVgugUF7ITMmr4J9OiHcX74k4T4p0CGqdZP");
+    Parse.User.enableRevocableSession();
+    </script>
     <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
-    <script data-main="js/main.js" src="node_modules/requirejs/require.js"></script>
     <title>Movie Catalog</title>
-    <meta property="og:url"           content="http://moviecatalog.net84.net" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Movie Catalog" />
-    <meta property="og:description"   content="Order the best movies..." />
-    <meta property="og:image"         content="http://moviecatalog.net84.net/Movie-Catalog.jpg" />
+    <meta property="og:url" content="http://moviecatalog.net84.net"/>
+    <meta property="og:type" content="website"/>
+    <meta property="og:title" content="Movie Catalog"/>
+    <meta property="og:description" content="Order the best movies..."/>
+    <meta property="og:image" content="http://moviecatalog.net84.net/Movie-Catalog.jpg"/>
 </head>
 
 <body>
+<script src="js/config.js"></script>
 <div id="fb-root"></div>
-
-<div id="login-form">
+<div class="container">
+    <div class="row">
+        <div id="login-form">
+        </div>
+    </div>
 </div>
 <div id="container">
     <header>
@@ -34,28 +41,32 @@
                 <div class="col-md-5"></div>
                 <div class="col-md-4"></div>
                 <div class="col-md-3" id="cart-tempate">
-
                 </div>
             </div>
         </div>
     </header>
 </div>
 <div id="wrapper">
-    
+
 </div>
 
 <!--<script src="node_modules/rsvp/dist/rsvp.js"></script>-->
 <!--<script src="js/serverInit.js"></script>-->
-
- <!--<script src="model/cartProduct.js"></script>-->
+<!--<script src="model/cartProduct.js"></script>-->
 <!--<script src="model/cart.js"></script>-->
 <!--<script src="model/signUp.js"></script>-->
-<!--<script src="model/logIn.js"></script>-->
+<!--<script src="model/LogIn.js"></script>-->
 <!--<script src="model/movie.js"></script>-->
 <!--<script src="controller/loggerController.js"></script>-->
 <!--<script src="controller/cartController.js"></script>-->
 <!--<script src="controller/moviesController.js"></script>-->
 
-
+<script>
+    console.log("Pred System!");
+    System.import("js/app.js").then(function(model){
+        console.log("Posle System!");
+        model.init();
+    });
+</script>
 </body>
 </html>

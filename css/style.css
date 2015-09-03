@@ -27,7 +27,7 @@ body{
   background:#2288bb;
 }
 #login-form{
-  position: fixed;
+  position: relative;
   top:0;
   right:0;
 }
@@ -39,6 +39,10 @@ body{
   right: 10px;
   transition:opacity 1s;
   -webkit-transition:opacity 1s;
+  z-index: 20000;
+}
+.container{
+  margin-top: 10px;
 }
 .triangle{
   width:0;

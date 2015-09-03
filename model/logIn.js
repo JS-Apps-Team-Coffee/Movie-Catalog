@@ -2,13 +2,9 @@
  * Created by Goran on 8/27/2015.
  */
 function logIn(username, password) {
-    user = new Parse.User();
+    var user = new Parse.User();
     var promise = new Parse.Promise();
     Parse.User.logIn(username, password)
-        .then(function(user) {
-            console.log('prv promis');
-            return Parse.User.become(Parse.Session.sessionToken);
-        })
         .then(function(user) {
             promise.resolve(user);
         }, function(error) {
@@ -18,3 +14,5 @@ function logIn(username, password) {
 
     return promise;
 }
+
+export default {logIn};
