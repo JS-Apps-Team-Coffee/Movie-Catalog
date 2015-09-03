@@ -9,7 +9,7 @@ define(function() {
                     return;
                 }
                 var url = 'view/' + templateName + '.handlebars';
-                console.log(url);
+                
                 $.ajax({
                     url: url,
                     success: function(html) {

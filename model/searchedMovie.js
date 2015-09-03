@@ -18,10 +18,10 @@ define(["/model/movie.js"], function(movie) {
                 return this._year;
             },
             set: function(value) {
-                if (value > 0) {
+                if (value) {
                     this._year = value;
                 } else {
-                    throw Error("Year can't be smaller than 0!");
+                    throw Error("Year can't be empty!");
                 }
             }
         });
@@ -41,6 +41,6 @@ define(["/model/movie.js"], function(movie) {
 
         return searchedMovie;
     }(movie));
-    
+
     return searchedMovie;
 });

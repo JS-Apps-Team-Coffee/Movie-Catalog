@@ -1,5 +1,6 @@
-define(function() {
+define(function() { 
     function getJSON(serviceUrl) {
+
         return $.ajax({
             url: serviceUrl
         });

@@ -11,6 +11,11 @@ define(["/model/searchedMovie.js", "/model/http-requester.js"], function(searche
         httpRequester.getJSON(searchedTitle)
             .then(function(data) {
                 var movies = data['Search'];
+
+                if(!movies){
+                    movies = [];
+                }
+
                 for (i = 0, len = movies.length; i < len; i += 1) {
                     var movie = Object.create(searchedMovie);
                     movie.title = movies[i].Title;

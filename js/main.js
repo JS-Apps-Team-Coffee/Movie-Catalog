@@ -26,5 +26,12 @@ require(["js/serverInit.js",
                 moviesController.load();
             });
 
+            this.get('#/search/:title', function() {
+                var searchedParameter = this.params.title;
+                
+                searchedMoviesController.load(searchedParameter);
+            });
+
+
         }).run('#/');
     });
