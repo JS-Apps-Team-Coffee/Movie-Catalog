@@ -1,48 +1,46 @@
-define(["../model/searched-movies-generator.js",
-        "../js/template.js",
-        "../node_modules/handlebars/dist/handlebars.js",
-        "../model/movie-previewer.js"
-    ],
-    function(generator, template, handlebars, previewer) {
-        function load(searchedParameter) {
-            var searchedMoviesAddress = 'http://www.omdbapi.com/?s=' + searchedParameter + '&y=&plot=short&r=json',
-                searchedMovies = [];
+import Generator from '../model/searched-movies-generator.js';
+import Template from '../js/template.js';
+import HandleBars from '../node_modules/handlebars/dist/handlebars.js';
+import Previewer from '../model/movie-previewer.js';
 
-            generator.searchMovies(searchedMoviesAddress)
-                .then(function(movies) {
-                    if (movies.length === 0) {
-                        alert('No results');
-                    }
-                    searchedMovies = movies;
-                    return template.get('searchedMoviesTemplate');
-                })
-                .then(function(html) {
-                    var searchedMoviesTemplate = handlebars.compile(html);
 
-                    $('#wrapper').html(searchedMoviesTemplate({
-                        searchedMovies: searchedMovies
-                    }));
+function load(searchedParameter) {
+    var searchedMoviesAddress = 'http://www.omdbapi.com/?s=' + searchedParameter + '&y=&plot=short&r=json',
+        searchedMovies = [];
 
-                    $('#search-table').on('click', '.search-item', function() {
-                        var title = $(this).html(),
-                            foundMovie;
+    Generator.searchMovies(searchedMoviesAddress)
+        .then(function (movies) {
+            if (movies.length === 0) {
+                alert('No results');
+            }
+            searchedMovies = movies;
+            return Template.get('searchedMoviesTemplate');
+        })
+        .then(function (html) {
+            var searchedMoviesTemplate = HandleBars.compile(html);
 
-                        previewer.loadMovie(title)
-                            .then(function(movie) {
-                                foundMovie = movie;
-                                return template.get('topMovieTemplate');
-                            })
-                            .then(function(html) {
-                                var moviePreviewTemplate = handlebars.compile(html);
-                                console.log(foundMovie);
-                                $('#top-movie').html(moviePreviewTemplate(foundMovie));
-                                console.log('test');                                
-                            });
+            $('#wrapper').html(searchedMoviesTemplate({
+                searchedMovies: searchedMovies
+            }));
+
+            $('#search-table').on('click', '.search-item', function () {
+                var title = $(this).html(),
+                    foundMovie;
+
+                Previewer.loadMovie(title)
+                    .then(function (movie) {
+                        foundMovie = movie;
+                        return Template.get('topMovieTemplate');
+                    })
+                    .then(function (html) {
+                        var moviePreviewTemplate = HandleBars.compile(html)
+                            console.log(foundMovie);
+                        $('#top-movie').html('');
+                            $('#top-movie').html(moviePreviewTemplate(foundMovie));
+                            console.log('test');
+                        });
                     });
-                });
-        }
+        });
+}
 
-        return {
-            load: load
-        };
-    });
+export default {load}

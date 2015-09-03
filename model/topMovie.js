@@ -1,20 +1,22 @@
-define(["/model/movie.js"], function(movie) {
+import MovieParent from './movie.js';
 
-    var topMovie = (function(parent) {
-        var topMovie = Object.create(parent);
 
-        Object.defineProperty(topMovie, 'init', {
-            value: function(title, description, image, rating, link) {
-                parent.init.call(this, title, link);
-                this.description = description;
-                this.image = image;
-                this.rating = rating;
+    var TopMovie = (function(parent) {
+         function TopMovie (title, description, image, rating, link,search){
+             parent.call(this, title, link);
+             this.description = description;
+             this.image = image;
+             this.rating = rating;
+             this.search = search;
+        }
 
-                return this;
-            }
-        });
+        TopMovie.prototype = (function(parent){
+            function F(){};
+            F.prototype = parent.prototype;
+            return new F;
+        }(parent));
 
-        Object.defineProperty(topMovie, 'description', {
+        Object.defineProperty(TopMovie.prototype , 'description', {
             get: function() {
                 return this._description;
             },
@@ -27,7 +29,7 @@ define(["/model/movie.js"], function(movie) {
             }
         });
 
-        Object.defineProperty(topMovie, 'image', {
+        Object.defineProperty(TopMovie.prototype , 'image', {
             get: function() {
                 return this._image;
             },
@@ -40,7 +42,7 @@ define(["/model/movie.js"], function(movie) {
             }
         });
 
-        Object.defineProperty(topMovie, 'rating', {
+        Object.defineProperty(TopMovie.prototype , 'rating', {
             get: function() {
                 return this._rating;
             },
@@ -53,8 +55,8 @@ define(["/model/movie.js"], function(movie) {
             }
         });
 
-        return topMovie;
-    }(movie));
+        return TopMovie;
+    }(MovieParent.Movie));
 
-    return topMovie;    
-});
+
+export default {TopMovie}

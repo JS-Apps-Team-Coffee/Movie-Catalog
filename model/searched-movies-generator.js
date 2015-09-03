@@ -1,42 +1,42 @@
-define(["/model/searchedMovie.js", "/model/http-requester.js"], function(searchedMovie, httpRequester) {
+import SearchMovieModel from '../model/searchedMovie.js';
+import HttpRequester from '../model/http-requester.js';
 
-    var imdb = "http://www.imdb.com/title/";
 
-    function searchMovies(searchedTitle) {
-        var promise = new Parse.Promise(),
-            searchedMovies = [],
-            i,
-            len;
+var imdb = "http://www.imdb.com/title/";
 
-        httpRequester.getJSON(searchedTitle)
-            .then(function(data) {
-                var movies = data['Search'];
+function searchMovies(searchedTitle) {
+    var promise = new Parse.Promise(),
+        searchedMovies = [],
+        i,
+        len;
 
-                if(!movies){
-                    movies = [];
-                }
+    HttpRequester.getJSON(searchedTitle)
+        .then(function (data) {
+            var movies = data['Search'];
 
-                for (i = 0, len = movies.length; i < len; i += 1) {
-                    var movie = Object.create(searchedMovie);
-                    movie.title = movies[i].Title;
-                    movie.year = movies[i].Year;
-                    movie.link = imdb + movies[i].imdbID;
-                    movie.type = movies[i].Type;
+            if (!movies) {
+                movies = [];
+            }
 
-                    searchedMovies.push(movie);
-                }
+            for (i = 0, len = movies.length; i < len; i += 1) {
+                var movie = new SearchMovieModel.SearchedMovie(
+                        movies[i].Title,
+                        movies[i].Year,
+                        movies[i].Type,
+                        imdb + movies[i].imdbID
+                    );
 
-                promise.resolve(searchedMovies);
+                searchedMovies.push(movie);
+            }
 
-            }, function(error) {
-                alert(error.message);
-                promise.reject(error.message);
-            });
+            promise.resolve(searchedMovies);
 
-        return promise;
-    }
+        }, function (error) {
+            alert(error.message);
+            promise.reject(error.message);
+        });
 
-    return {
-        searchMovies: searchMovies
-    };
-});
+    return promise;
+}
+
+export default {searchMovies}

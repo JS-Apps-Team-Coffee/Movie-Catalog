@@ -1,4 +1,4 @@
-define(function() { 
+
     function getJSON(serviceUrl) {
 
         return $.ajax({
@@ -6,7 +6,5 @@ define(function() {
         });
     }
 
-    return {
-        getJSON: getJSON
-    };
-});
+
+export default{getJSON}

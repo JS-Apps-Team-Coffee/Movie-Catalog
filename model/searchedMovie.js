@@ -1,19 +1,24 @@
-define(["/model/movie.js"], function(movie) {
+import MovieParent from '../model/movie.js';
 
-    var searchedMovie = (function(parent) {
-        var searchedMovie = Object.create(parent);
 
-        Object.defineProperty(searchedMovie, 'init', {
-            value: function(title, year, type, link) {
-                parent.init.call(this, title, link);
-                this.year = year;
-                this.type = type;
 
-                return this;
-            }
-        });
+    var SearchedMovie = (function(parent) {
+        function SearchedMovie (title, year, type, link){
+            parent.call(this, title, link);
+            this.year = year;
+            this.type = type;
 
-        Object.defineProperty(searchedMovie, 'year', {
+        };
+
+
+        SearchedMovie.prototype = (function(parent){
+            function F(){};
+            F.prototype = parent.prototype;
+            return new F;
+        }(parent));
+
+
+        Object.defineProperty(SearchedMovie.prototype, 'year', {
             get: function() {
                 return this._year;
             },
@@ -26,7 +31,7 @@ define(["/model/movie.js"], function(movie) {
             }
         });
 
-        Object.defineProperty(searchedMovie, 'type', {
+        Object.defineProperty(SearchedMovie.prototype, 'type', {
             get: function() {
                 return this._type;
             },
@@ -39,8 +44,8 @@ define(["/model/movie.js"], function(movie) {
             }
         });
 
-        return searchedMovie;
-    }(movie));
+        return SearchedMovie;
+    }(MovieParent.Movie));
 
-    return searchedMovie;
-});
+
+export default {SearchedMovie}
