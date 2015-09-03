@@ -1,12 +1,11 @@
-define(function() {
-    var templates = function() {
+
         var loadedTemplates = {};
 
         function get(templateName) {
-            var promise = new Promise(function(resolve, reject) {
+            var promise = new Parse.Promise();
                 if (loadedTemplates[templateName]) {
-                    resolve(loadedTemplates[templateName]);
-                    return;
+                    promise.resolve(loadedTemplates[templateName]);
+                    return promise;
                 }
                 var url = 'view/' + templateName + '.handlebars';
                 
@@ -14,21 +13,18 @@ define(function() {
                     url: url,
                     success: function(html) {
                         loadedTemplates[templateName] = html;
-                        resolve(html);
+                        promise.resolve(html);
                     },
                     error: function(err) {
+
                         console.log(err.statusText);
                     }
                 });
-            });
+
 
             return promise;
         }
 
-        return {
-            get: get
-        };
-    }();
+export default {get}
 
-    return templates;
-});
+

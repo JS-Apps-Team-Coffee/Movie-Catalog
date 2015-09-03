@@ -12,12 +12,13 @@
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/movies.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
-
+    <script src="node_modules/systemjs/dist/system.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
+    <script src="js/config.js"></script>
     <script type="text/javascript" src="http://www.parsecdn.com/js/parse-1.5.0.min.js"></script>
     <script src="node_modules/handlebars/dist/handlebars.min.js"></script>
     <script src="node_modules/sammy/lib/sammy.js"></script>
-    <script data-main="js/main.js" src="node_modules/requirejs/require.js"></script>
+
     <title>Movie Catalog</title>
     <meta property="og:url"           content="http://moviecatalog.net84.net" />
     <meta property="og:type"          content="website" />
@@ -57,6 +58,14 @@
     
 </div>
 
+
+<script>
+    console.log("Pred System!");
+    System.import("js/app.js").then(function(model){
+        console.log("Posle System!");
+        model.init();
+    });
+</script>
 <!-- Search button -->
 <script>
     $('#search-btn').on('click', function(){

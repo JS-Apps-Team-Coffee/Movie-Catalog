@@ -1,23 +1,24 @@
-define(["../model/searched-movies-generator.js",
-        "../js/template.js",
-        "../node_modules/handlebars/dist/handlebars.js",
-        "../model/movie-previewer.js"
-    ],
-    function(generator, template, handlebars, previewer) {
+
+import Generatr from '../model/searched-movies-generator.js';
+import Template from '../js/template.js';
+import HandleBars from '../node_modules/handlebars/dist/handlebars.js';
+import Previewer from '../model/movie-previewer.js';
+
+
         function load(searchedParameter) {
             var searchedMoviesAddress = 'http://www.omdbapi.com/?s=' + searchedParameter + '&y=&plot=short&r=json',
                 searchedMovies = [];
 
-            generator.searchMovies(searchedMoviesAddress)
+            Generatr.searchMovies(searchedMoviesAddress)
                 .then(function(movies) {
                     if (movies.length === 0) {
                         alert('No results');
                     }
                     searchedMovies = movies;
-                    return template.get('searchedMoviesTemplate');
+                    return Template.get('searchedMoviesTemplate');
                 })
                 .then(function(html) {
-                    var searchedMoviesTemplate = handlebars.compile(html);
+                    var searchedMoviesTemplate = HandleBars.compile(html);
 
                     $('#wrapper').html(searchedMoviesTemplate({
                         searchedMovies: searchedMovies
@@ -27,13 +28,13 @@ define(["../model/searched-movies-generator.js",
                         var title = $(this).html(),
                             foundMovie;
 
-                        previewer.loadMovie(title)
+                        Previewer.loadMovie(title)
                             .then(function(movie) {
                                 foundMovie = movie;
-                                return template.get('topMovieTemplate');
+                                return Template.get('topMovieTemplate');
                             })
                             .then(function(html) {
-                                var moviePreviewTemplate = handlebars.compile(html);
+                                var moviePreviewTemplate = HandleBars.compile(html);
                                 console.log(foundMovie);
                                 $('#top-movie').html(moviePreviewTemplate(foundMovie));
                                 console.log('test');                                
@@ -42,7 +43,4 @@ define(["../model/searched-movies-generator.js",
                 });
         }
 
-        return {
-            load: load
-        };
-    });
+   export default {load}

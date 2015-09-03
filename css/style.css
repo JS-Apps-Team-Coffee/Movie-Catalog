@@ -27,7 +27,7 @@ body{
   background:#2288bb;
 }
 #login-form{
-  position: fixed;
+  position: relative;
   top:0;
   right:0;
 }
@@ -39,6 +39,10 @@ body{
   right: 10px;
   transition:opacity 1s;
   -webkit-transition:opacity 1s;
+  z-index: 20000;
+}
+.container{
+  margin-top: 10px;
 }
 .triangle{
   width:0;
@@ -164,24 +168,23 @@ form{
 #cart .dropdown-menu li p {
   margin: 20px 0;
 }
-
 /* search panel */
 #imaginary_container{
-    margin-top:20%; /* Don't copy this */
+  margin-top:20%; /* Don't copy this */
 }
 .stylish-input-group .input-group-addon{
-    background: white !important; 
+  background: white !important;
 }
 .stylish-input-group .form-control{
-  border-right:0; 
-  box-shadow:0 0 0; 
+  border-right:0;
+  box-shadow:0 0 0;
   border-color:#ccc;
 }
 .stylish-input-group button{
-    border:0;
-    background:transparent;
+  border:0;
+  background:transparent;
 }
 
 a {
-    text-decoration: none !important;
+  text-decoration: none !important;
 }

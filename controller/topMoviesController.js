@@ -1,18 +1,19 @@
-define(["../model/top-movies-generator.js",
-        "../js/template.js",
-        "../node_modules/handlebars/dist/handlebars.js"
-    ],
-    function(generator, template, handlebars) {
+
+import Generator from '../model/top-movies-generator.js';
+//import HandleBars from '../node_modules/handlebars/dist/handlebars.js';
+import Template from '../js/template.js';
+
+
         function load() {
             var topMovies = [];
 
-            generator.getTop4Movies()
+            Generator.getTop4Movies()
                 .then(function(movies) {
                     topMovies = movies;
-                    return template.get('topMovieTemplate');
+                    return Template.get('topMovieTemplate');
                 })
                 .then(function(html) {
-                    var handlebarsTemplate = handlebars.compile(html);
+                    var handlebarsTemplate = Handlebars.compile(html);
               
                     $('#wrapper').load('view/firstPageTemplate.html', function() {
                         for (var i = 1; i <= 4; i += 1) {
@@ -33,7 +34,4 @@ define(["../model/top-movies-generator.js",
             }(document, 'script', 'facebook-jssdk'));
         }
 
-        return {
-            load: load
-        };
-    });
+       export default {load}

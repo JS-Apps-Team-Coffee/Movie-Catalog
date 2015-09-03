@@ -1,4 +1,5 @@
-define(["/model/topMovie.js", "/model/http-requester.js"], function(topMovie, httpRequester) {
+import TopMovieModel from '../model/topMovie.js';
+import HttpRequester from '../model/http-requester.js';
 
     var imdbURl = "http://www.imdb.com/title/";
     var initialURL = 'http://www.omdbapi.com/?t=';
@@ -6,10 +7,10 @@ define(["/model/topMovie.js", "/model/http-requester.js"], function(topMovie, ht
     function loadMovie(title) {
         var promise = new Parse.Promise();
 
-        var movie = Object.create(topMovie);
+        var movie = new TopMovieModel.TopMovie('def','def','def','def','def');
         title = title.replace(/\s/g, '+');
         var searchedURL = initialURL + title;
-        httpRequester.getJSON(searchedURL)
+        HttpRequester.getJSON(searchedURL)
             .then(function(foundMovie) {
 
                 movie.title = foundMovie.Title;
@@ -34,7 +35,4 @@ define(["/model/topMovie.js", "/model/http-requester.js"], function(topMovie, ht
         return promise;
     }
 
-    return {
-        loadMovie: loadMovie
-    };
-});
+export default {loadMovie}
