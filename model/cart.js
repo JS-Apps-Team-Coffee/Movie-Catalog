@@ -33,10 +33,8 @@ var Cart = Parse.Object.extend("Cart", {
         return this;
     },
     removeProduct: function (title) {
-        console.log("Title in remove is :");
-        console.log(title);
         for(var i= 0,l=this.cartProducts.length;i<l;i+=1){
-            if(this.cartProducts[i].get('title')===title){
+            if((this.cartProducts[i].get('title'))===title){
                 var q =this.cartProducts[i].get('quantity');
                 if(q>1){
                     q-=1;
