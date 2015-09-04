@@ -1,7 +1,3 @@
-/**
- * Created by Goran on 8/28/2015.
- */
-
 var CartProduct = Parse.Object.extend("CartProduct", {
 
     initialize: function (attrs, options) {

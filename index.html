@@ -68,15 +68,6 @@
         model.init();
     });
 </script>
-<!-- Search button -->
-<script>
-    $('#search-btn').on('click', function(){
-        var param = $('#search-input').val();
-        param = param.replace(/\s/g, '+');
-        var initialPage = location.pathname;
-        location.replace(initialPage + '#/search/' + param);
-    });
-</script>
 
 </body>
 </html>

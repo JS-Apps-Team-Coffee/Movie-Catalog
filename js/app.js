@@ -9,9 +9,13 @@ import SearchController from '../controller/searchedMoviesController.js';
 import CartController from '../controller/cartController.js';
 import SlideShow from '../controller/slideShow.js';
 
+
+
 export function init(){
     LoggerController.load();
     CartController.load();
+
+
 
     var app = Sammy('#wrapper', function() {
 

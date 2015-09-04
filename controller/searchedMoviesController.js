@@ -3,10 +3,18 @@ import Template from '../js/template.js';
 import HandleBars from '../node_modules/handlebars/dist/handlebars.js';
 import Previewer from '../model/movie-previewer.js';
 
+$('#search-btn').on('click', function(){
+    var param = $('#search-input').val();
+    param = param.replace(/\s/g, '+');
+    var initialPage = location.pathname;
+    location.replace(initialPage + '#/search/' + param);
+});
 
 function load(searchedParameter) {
     var searchedMoviesAddress = 'http://www.omdbapi.com/?s=' + searchedParameter + '&y=&plot=short&r=json',
         searchedMovies = [];
+
+
 
     Generator.searchMovies(searchedMoviesAddress)
         .then(function (movies) {
@@ -29,7 +37,18 @@ function load(searchedParameter) {
 
                 Previewer.loadMovie(title)
                     .then(function (movie) {
+                        ///fb
+                        (function(d, s, id) {
+                            var js, fjs = d.getElementsByTagName(s)[0];
+                            if (d.getElementById(id)) return;
+                            js = d.createElement(s);
+                            js.id = id;
+                            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+                            fjs.parentNode.insertBefore(js, fjs);
+                        }(document, 'script', 'facebook-jssdk'));
+
                         foundMovie = movie;
+
                         return Template.get('topMovieTemplate');
                     })
                     .then(function (html) {

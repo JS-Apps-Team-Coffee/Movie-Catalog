@@ -1,6 +1,4 @@
-
 import Generator from '../model/top-movies-generator.js';
-//import HandleBars from '../node_modules/handlebars/dist/handlebars.js';
 import Template from '../js/template.js';
 
 
@@ -14,14 +12,11 @@ import Template from '../js/template.js';
                 })
                 .then(function(html) {
                     var handlebarsTemplate = Handlebars.compile(html);
-              
-                   // $('#wrapper').load('view/firstPageTemplate.html', function() {
                         for (var i = 1; i <= 4; i += 1) {
                             var $movieWrapper = $('#top-movie' + i);
 
                             $movieWrapper.html(handlebarsTemplate(topMovies[i - 1]));
                         }
-                    //});
                 });
 
             (function(d, s, id) {

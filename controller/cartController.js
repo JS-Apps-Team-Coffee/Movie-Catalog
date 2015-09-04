@@ -14,8 +14,6 @@ Handlebars.registerHelper("getPrice", function (cartProduct) {
 
 function load() {
     $("#cart-tempate").load("../view/cartTemplate.html", function () {
-
-
         alert("Cart template render success!");
         var cart;
         var cartProductTemplateHtml;
@@ -26,7 +24,10 @@ function load() {
         });
 
         $("#wrapper").on('click', "button[data-info='add-to-cart']", function (e) {
-            alert("Tuka");
+            if(!Parse.User.current()){
+                alert("Please sign in!");
+                return;
+            }
             var $parent;
             if (e.target instanceof HTMLButtonElement) {
                 $parent = $(e.target).parent();
@@ -34,13 +35,13 @@ function load() {
                 $parent = $($(e.target).parent()).parent();
             }
             var title = $parent.find("p[data-info='title']").html();
-
+            var price = $parent.find("p[data-info='rating']").html();
             if (cart === undefined) {
                 cart = Cart.createCart();
             }
 
             var product = CartProduct.createCartProduct();
-            product.init(title, 1, 10);
+            product.init(title, 1, parseFloat(price));
             console.log("product :");
             console.log(product);
             cart.addProduct(product);
@@ -75,6 +76,12 @@ function load() {
                     var usercart = user.relation("carts");
                     usercart.add(crt);
                     return user.save();
+                }).then(function (user) {
+                    $("#cart").toggleClass('open');
+                    $('#movies-in-cart').html('');
+                    cart.cartProducts = [];
+                    $('#total-price').html('$' + cart.totalPrice());
+                    $('#cart-total-products').html(cart.getQuantity() + ' item(s)');
                 });
         });
 
@@ -94,7 +101,7 @@ function load() {
 
             cart.removeProduct(title);
             parent.remove();
-                console.log("Cart after remove of movie :"+title);
+                console.log("Cart after remove of movie :"+title)
             console.log(cart.cartProducts);
             $('#total-price').html('$' + cart.totalPrice());
             $('#cart-total-products').html(cart.getQuantity() + ' item(s)');

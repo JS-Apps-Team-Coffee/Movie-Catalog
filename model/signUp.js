@@ -9,21 +9,7 @@ function signUp(username, password, email, mailingAddress) {
     user.set("password", password);
     user.set("email", email);
     user.set("mailingAddress",mailingAddress);
-    user.set("carts",[]);
 
-    console.log(user);
-    // other fields can be set just like with Parse.Object
-
-    // user.signUp(null, {
-    //     success: function (user) {
-    //         // Hooray! Let them use the app now.
-    //         alert("Sign Up success!");
-    //     },
-    //     error: function (user, error) {
-    //         // Show the error message somewhere and let the user try again.
-    //         alert("Error: " + error.code + " " + error.message);
-    //     }
-    // });
     var promise = new Parse.Promise();
     user.signUp(null).then(function(user) {
             alert('Sign up successfuly!');

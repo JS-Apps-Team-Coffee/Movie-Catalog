@@ -28,7 +28,14 @@ function load() {
             email = $('#su-email').val();
             mailingAddress = $('#su-mailing-address').val();
             SignUp.signUp(username, password, email, mailingAddress)
-                .then(null, function (error) {
+                .then(function (data) {
+                    $('#signup').hide();
+                    $('#toggle-login').hide();
+                    $('#toggle-signup').hide();
+                    $('#logout-btn').show();
+                    $('#toggle-username').html("Hi "+data.get('username')+" !").show();
+
+                }, function (error) {
                     alert(error.message);
                 });
         });
