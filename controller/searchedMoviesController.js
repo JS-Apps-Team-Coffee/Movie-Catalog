@@ -3,11 +3,11 @@ import Template from '../js/template.js';
 import HandleBars from '../node_modules/handlebars/dist/handlebars.js';
 import Previewer from '../model/movie-previewer.js';
 
-$('#search-btn').on('click', function(){
-    var param = $('#search-input').val();
-    param = param.replace(/\s/g, '+');
-    var initialPage = location.pathname;
-    location.replace(initialPage + '#/search/' + param);
+// search button
+$('#search-input').on('input', function() {
+    var title = $(this).val().replace(/\s/g, '+');
+
+    $('#link').attr('href', '#/search/' + title);
 });
 
 function load(searchedParameter) {
@@ -17,26 +17,29 @@ function load(searchedParameter) {
 
 
     Generator.searchMovies(searchedMoviesAddress)
-        .then(function (movies) {
+        .then(function(movies) {
             if (movies.length === 0) {
-                alert('No results');
+                // alert('No results');
+
+                $('#wrapper').load('view/alertTemplate.html');
+                return;
             }
             searchedMovies = movies;
             return Template.get('searchedMoviesTemplate');
         })
-        .then(function (html) {
+        .then(function(html) {
             var searchedMoviesTemplate = HandleBars.compile(html);
 
             $('#wrapper').html(searchedMoviesTemplate({
                 searchedMovies: searchedMovies
             }));
 
-            $('#search-table').on('click', '.search-item', function () {
+            $('#search-table').on('click', '.search-item', function() {
                 var title = $(this).html(),
                     foundMovie;
 
                 Previewer.loadMovie(title)
-                    .then(function (movie) {
+                    .then(function(movie) {
                         ///fb
                         (function(d, s, id) {
                             var js, fjs = d.getElementsByTagName(s)[0];
@@ -51,15 +54,17 @@ function load(searchedParameter) {
 
                         return Template.get('topMovieTemplate');
                     })
-                    .then(function (html) {
+                    .then(function(html) {
                         var moviePreviewTemplate = HandleBars.compile(html)
-                            console.log(foundMovie);
+                        console.log(foundMovie);
                         $('#top-movie').html('');
-                            $('#top-movie').html(moviePreviewTemplate(foundMovie));
-                            console.log('test');
-                        });
+                        $('#top-movie').html(moviePreviewTemplate(foundMovie));
+                        console.log('test');
                     });
+            });
         });
 }
 
-export default {load}
+export default {
+    load
+}

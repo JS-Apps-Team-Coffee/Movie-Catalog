@@ -188,3 +188,7 @@ form{
 a {
   text-decoration: none !important;
 }
+
+#alert-msg{
+  margin-top: 50px;
+}
