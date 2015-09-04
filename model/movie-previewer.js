@@ -7,12 +7,11 @@ import HttpRequester from '../model/http-requester.js';
     function loadMovie(title) {
         var promise = new Parse.Promise();
 
-        var movie = new TopMovieModel.TopMovie('def','def','def','def','def');
+        var movie = new TopMovieModel.TopMovie('def','def','def','def','def',true);
         title = title.replace(/\s/g, '+');
         var searchedURL = initialURL + title;
         HttpRequester.getJSON(searchedURL)
             .then(function(foundMovie) {
-
                 movie.title = foundMovie.Title;
                 if (foundMovie.Plot === 'N/A') {
                     movie.description = '';

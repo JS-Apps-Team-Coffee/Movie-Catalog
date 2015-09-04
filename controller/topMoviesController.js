@@ -15,13 +15,13 @@ import Template from '../js/template.js';
                 .then(function(html) {
                     var handlebarsTemplate = Handlebars.compile(html);
               
-                    $('#wrapper').load('view/firstPageTemplate.html', function() {
+                   // $('#wrapper').load('view/firstPageTemplate.html', function() {
                         for (var i = 1; i <= 4; i += 1) {
                             var $movieWrapper = $('#top-movie' + i);
 
                             $movieWrapper.html(handlebarsTemplate(topMovies[i - 1]));
                         }
-                    });
+                    //});
                 });
 
             (function(d, s, id) {

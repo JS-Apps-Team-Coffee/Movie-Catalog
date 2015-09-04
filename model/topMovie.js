@@ -2,11 +2,12 @@ import MovieParent from './movie.js';
 
 
     var TopMovie = (function(parent) {
-         function TopMovie (title, description, image, rating, link){
+         function TopMovie (title, description, image, rating, link,search){
              parent.call(this, title, link);
              this.description = description;
              this.image = image;
              this.rating = rating;
+             this.search = search;
         }
 
         TopMovie.prototype = (function(parent){

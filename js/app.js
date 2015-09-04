@@ -7,6 +7,7 @@ import LoggerController from '../controller/loggerController.js';
 import TopMoviesController from '../controller/topMoviesController.js';
 import SearchController from '../controller/searchedMoviesController.js';
 import CartController from '../controller/cartController.js';
+import SlideShow from '../controller/slideShow.js';
 
 export function init(){
     LoggerController.load();
@@ -14,15 +15,25 @@ export function init(){
 
     var app = Sammy('#wrapper', function() {
 
-        this.get('#/', function() {
-            TopMoviesController.load();
-        });
-
         this.get('#/search/:title', function() {
             var searchedParameter = this.params.title;
 
             SearchController.load(searchedParameter);
         });
+
+        this.get('',function(){
+            $('#wrapper').load('view/firstPageTemplate.html', function() {
+                TopMoviesController.load();
+                SlideShow.load();
+            });
+        })
+        this.get('#/', function() {
+            $('#wrapper').load('view/firstPageTemplate.html', function() {
+                TopMoviesController.load();
+                SlideShow.load();
+            });
+        });
+
 
 
     }).run('#/');

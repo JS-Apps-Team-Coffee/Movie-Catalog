@@ -9,7 +9,6 @@ import CartProduct from '../model/cartProduct.js';
 
 function load() {
 
-
     $("#login-form").load("view/loggerTemplate.html", function () {
 
         var currentUser = Parse.User.current();
@@ -18,7 +17,7 @@ function load() {
             $('#toggle-login').hide();
             $('#toggle-signup').hide();
             $('#logout-btn').show();
-            $('#toggle-username').html(currentUser.get('username'));
+            $('#toggle-username').html("Hi "+currentUser.get('username')+" !");
             $('#toggle-username').show();
         }
 
@@ -34,7 +33,6 @@ function load() {
                 });
         });
 
-        // });
         $('#login-btn').click(function () {
             var username, password;
             username = $('#li-username').val();
@@ -81,9 +79,5 @@ function load() {
         });
 
     });
-
-
 }
-
-
-export default {load};//});
+export default {load};
