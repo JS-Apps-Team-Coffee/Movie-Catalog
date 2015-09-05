@@ -188,3 +188,9 @@ form{
 a {
   text-decoration: none !important;
 }
+#alert-msg{
+  margin-top:50px;
+}
+.search-item:hover{
+  cursor:pointer;
+}

@@ -18,7 +18,6 @@ moviesUrls.push(top2);
 moviesUrls.push(top3);
 moviesUrls.push(top4);
 
-
     function getTop4Movies() {
 
         console.log("In generator!");
@@ -90,57 +89,6 @@ moviesUrls.push(top4);
 
         return promise;
     }
-
-    //    HttpRequester.getJSON(top1)
-    //        .then(function (move) {
-    //            var firstMovie = Object.create(TopMovieModel);
-    //            firstMovie.title = move.Title;
-    //            firstMovie.description = move.Plot;
-    //            firstMovie.image = move.Poster;
-    //            firstMovie.rating = move.imdbRating;
-    //            firstMovie.link = imdb + move.imdbID;
-    //            topMovies.push(firstMovie);
-    //            return HttpRequester.getJSON(top2);
-    //        }).then(function (move) {
-    //
-    //            var firstMovie = Object.create(TopMovieModel);
-    //            firstMovie.title = move.Title;
-    //            firstMovie.description = move.Plot;
-    //            firstMovie.image = move.Poster;
-    //            firstMovie.rating = move.imdbRating;
-    //            firstMovie.link = imdb + move.imdbID;
-    //            topMovies.push(firstMovie);
-    //            return HttpRequester.getJSON(top3);
-    //        }).then(
-    //        function (move) {
-    //
-    //            var firstMovie = Object.create(TopMovieModel);
-    //            firstMovie.title = move.Title;
-    //            firstMovie.description = move.Plot;
-    //            firstMovie.image = move.Poster;
-    //            firstMovie.rating = move.imdbRating;
-    //            firstMovie.link = imdb + move.imdbID;
-    //            topMovies.push(firstMovie);
-    //            return HttpRequester.getJSON(top4);
-    //        }).then(function (move) {
-    //
-    //            var firstMovie = Object.create(TopMovieModel);
-    //            firstMovie.title = move.Title;
-    //            firstMovie.description = move.Plot;
-    //            firstMovie.image = move.Poster;
-    //            firstMovie.rating = move.imdbRating;
-    //            firstMovie.link = imdb + move.imdbID;
-    //            topMovies.push(firstMovie);
-    //            alert("Uraaaa");
-    //            localStorage.setItem('topMovies', JSON.stringify(topMovies));
-    //            promise.resolve(topMovies);
-    //        }, function (error) {
-    //            alert(error.message);
-    //            promise.reject(error.message);
-    //        });
-    //
-    //    return promise;
-    //}
 
   export default {getTop4Movies}
 

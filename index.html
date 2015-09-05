@@ -4,14 +4,21 @@
     <meta charset="UTF-8">
 
     <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Movie Catalog" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="http://moviecatalog.net84.net/Movie-Catalog.jpg" />
+    <meta property="og:url" content="http://moviecatalog.net84.net" />
+    <meta property="og:description" content="Order the best movies..." />
 
-	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 	<link rel="icon" href="/favicon.ico" type="image/x-icon">
 		
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/movies.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
     <script src="node_modules/systemjs/dist/system.js"></script>
     <script src="node_modules/jquery/dist/jquery.min.js"></script>
     <script src="js/config.js"></script>
@@ -20,15 +27,19 @@
     <script src="node_modules/sammy/lib/sammy.js"></script>
 
     <title>Movie Catalog</title>
-    <meta property="og:url"           content="http://moviecatalog.net84.net" />
-    <meta property="og:type"          content="website" />
-    <meta property="og:title"         content="Movie Catalog" />
-    <meta property="og:description"   content="Order the best movies..." />
-    <meta property="og:image"         content="http://moviecatalog.net84.net/Movie-Catalog.jpg" />
 </head>
 
 <body>
-
+<script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
 <div id="fb-root"></div>
 
 
@@ -42,7 +53,7 @@
                         <input type="text" class="form-control"  placeholder="Search Movies, TV shows and more..." id="search-input">
                         <span class="input-group-addon">
                             <button type="submit" id="search-btn">
-                                <span class="glyphicon glyphicon-search"></span>
+                                <a href="" id="link-1" class="glyphicon glyphicon-search"></a>
                             </button>  
                         </span>
                     </div>
@@ -66,15 +77,6 @@
     System.import("js/app.js").then(function(model){
         console.log("Posle System!");
         model.init();
-    });
-</script>
-<!-- Search button -->
-<script>
-    $('#search-btn').on('click', function(){
-        var param = $('#search-input').val();
-        param = param.replace(/\s/g, '+');
-        var initialPage = location.pathname;
-        location.replace(initialPage + '#/search/' + param);
     });
 </script>
 

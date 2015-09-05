@@ -20,11 +20,11 @@ function searchMovies(searchedTitle) {
 
             for (i = 0, len = movies.length; i < len; i += 1) {
                 var movie = new SearchMovieModel.SearchedMovie(
-                        movies[i].Title,
-                        movies[i].Year,
-                        movies[i].Type,
-                        imdb + movies[i].imdbID
-                    );
+                    movies[i].Title,
+                    movies[i].Year,
+                    movies[i].Type,
+                    imdb + movies[i].imdbID
+                );
 
                 searchedMovies.push(movie);
             }
